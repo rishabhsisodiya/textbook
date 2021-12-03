@@ -11,9 +11,22 @@ const App = () => {
 
   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
 
-  useEffect( async() => {
-   const value= await AsyncStorage.getItem("alreadylaunched");
-   console.log(value)
+  useEffect(() => {
+    try {
+      
+      AsyncStorage.getItem('alreadyLaunched').then((value) => {
+        if (value == null) {
+          AsyncStorage.setItem('alreadyLaunched', 'true'); // No need to wait for `setItem` to finish, although you might want to handle errors
+          setIsFirstLaunch(true);
+        } else {
+          setIsFirstLaunch(false);
+        }
+      });
+    } catch (error) {
+    //  Show Error screen
+      setIsFirstLaunch(null);
+      // setIsFirstLaunch(true);
+    }
   
   }, []);
 

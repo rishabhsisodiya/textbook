@@ -1,11 +1,12 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React, {useEffect, useState} from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useEffect, useState } from 'react';
 import LoginScreen from '../screens/LoginScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import SignupSscreen from '../screens/SignupScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import VerificationScreen from '../screens/VerificationScreen';
 import SignupScreen from '../screens/SignupScreen';
+import SelectCategory from '../screens/SelectCategory';
 
 const AppStack = createNativeStackNavigator();
 
@@ -37,11 +38,12 @@ const AuthStack = () => {
   }
 
   return (
-    <AppStack.Navigator initialRouteName={routeName} screenOptions={{headerShown: false}}>
+    <AppStack.Navigator initialRouteName={routeName} screenOptions={{ headerShown: false }}>
       <AppStack.Screen name="Home" component={OnboardingScreen} />
       <AppStack.Screen name="Login" component={LoginScreen} />
       <AppStack.Screen name="Signup" component={SignupScreen} />
       <AppStack.Screen name="Verification" component={VerificationScreen} />
+      <AppStack.Screen name="SelectCategory" component={SelectCategory} />
     </AppStack.Navigator>
   );
 };

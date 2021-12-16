@@ -15,7 +15,7 @@ import axios from 'axios';
 const VerificationScreen = ({
   route: {
     params: { phoneNumber },
-  },
+  }, navigation
 }) => {
   const firstInput = useRef();
   const secondInput = useRef();
@@ -35,9 +35,10 @@ const VerificationScreen = ({
     axios.post(url, body)
       .then(res => {
         console.log(res.data);
-        alert('Login Successfully');
+        // alert('Login Successfully');
+        navigation.navigate('SelectCategory', { token: res.data.data.token });
       })
-      .catch(err => console.log('Error: ' + err.response.data));
+      .catch(err => console.log('Error: ' + err));
   };
 
   return (

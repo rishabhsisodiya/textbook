@@ -33,14 +33,14 @@ const LoginScreen = ({ navigation }) => {
         navigation.navigate('Verification', { phoneNumber: mobile });
       })
       .catch(err => {
-        console.log('Error: ' + err.response.data);
+        console.log('Error: ' + err);
       });
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image
-        source={require('../assets/rn-social-logo.png')}
+        source={require('../../assets/rn-social-logo.png')}
         style={styles.logo}
       />
       <Text style={styles.text}>App Name</Text>

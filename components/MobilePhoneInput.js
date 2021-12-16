@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import PhoneInput from 'react-native-phone-number-input';
-import { windowHeight } from '../utils/Dimentions';
+import { windowHeight } from '../utils/Dimensions';
 
 const MobilePhoneInput = (props, ref) => {
   return (

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -11,16 +11,15 @@ import {
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import MobilePhoneInput from '../components/MobilePhoneInput';
-import {Colors} from '../constants';
+import { Colors } from '../constants';
 import axios from 'axios';
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({ navigation }) => {
   const [mobile, setMobile] = useState('');
   const [formattedMobileValue, setFormattedMobileValue] = useState('');
   const phoneInput = useRef(null);
 
   const login = async () => {
-    // const url = 'http://192.168.1.35:8000/api/v1/users/login';
     const url = 'https://testbook-backend.herokuapp.com/api/v1/users/login';
     const body = {
       mobile,
@@ -31,7 +30,7 @@ const LoginScreen = ({navigation}) => {
       .post(url, body)
       .then(res => {
         console.log(res.data);
-        navigation.navigate('Verification', {phoneNumber: mobile});
+        navigation.navigate('Verification', { phoneNumber: mobile });
       })
       .catch(err => {
         console.log('Error: ' + err.response.data);
@@ -74,7 +73,7 @@ const LoginScreen = ({navigation}) => {
       </TouchableOpacity> */}
 
       {Platform.OS === 'android' ? (
-        <View style={{marginTop: 100}}>
+        <View style={{ marginTop: 100 }}>
           <SocialButton
             buttonTitle="Sign In with Google"
             btnType="google"

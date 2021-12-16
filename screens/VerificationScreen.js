@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -8,27 +8,27 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Colors, Fonts} from '../constants';
-import {windowHeight, windowWidth} from '../utils/Dimentions';
+import { Colors, Fonts } from '../constants';
+import { windowHeight, windowWidth } from '../utils/Dimensions';
 import axios from 'axios';
 
 const VerificationScreen = ({
   route: {
-    params: {phoneNumber},
+    params: { phoneNumber },
   },
 }) => {
   const firstInput = useRef();
   const secondInput = useRef();
   const thirdInput = useRef();
   const fourthInput = useRef();
-  const [otp, setOtp] = useState({1: '', 2: '', 3: '', 4: ''});
+  const [otp, setOtp] = useState({ 1: '', 2: '', 3: '', 4: '' });
 
   const verify_otp = async () => {
-    // const url = 'http://192.168.1.35:8000/api/v1/users/verify-otp';
     const url = 'https://testbook-backend.herokuapp.com/api/v1/users/verify-otp';
+    let code = otp['1'] + otp['2'] + otp['3'] + otp['4'];
     const body = {
       mobile: phoneNumber,
-      otp: '7268',
+      otp: code,
     };
     console.log(body);
 
@@ -47,7 +47,7 @@ const VerificationScreen = ({
         backgroundColor={Colors.DEFAULT_WHITE}
         translucent
       />
-      <View style={{height: StatusBar.currentHeight}} />
+      <View style={{ height: StatusBar.currentHeight }} />
       <View style={styles.headerContainer}>
         <Ionicons
           name="chevron-back-outline"
@@ -69,7 +69,7 @@ const VerificationScreen = ({
             maxLength={1}
             ref={firstInput}
             onChangeText={text => {
-              setOtp({...otp, 1: text});
+              setOtp({ ...otp, 1: text });
               text && secondInput.current.focus();
             }}
           />
@@ -81,7 +81,7 @@ const VerificationScreen = ({
             maxLength={1}
             ref={secondInput}
             onChangeText={text => {
-              setOtp({...otp, 2: text});
+              setOtp({ ...otp, 2: text });
               text ? thirdInput.current.focus() : firstInput.current.focus();
             }}
           />
@@ -93,7 +93,7 @@ const VerificationScreen = ({
             maxLength={1}
             ref={thirdInput}
             onChangeText={text => {
-              setOtp({...otp, 3: text});
+              setOtp({ ...otp, 3: text });
               text ? fourthInput.current.focus() : secondInput.current.focus();
             }}
           />
@@ -105,7 +105,7 @@ const VerificationScreen = ({
             maxLength={1}
             ref={fourthInput}
             onChangeText={text => {
-              setOtp({...otp, 4: text});
+              setOtp({ ...otp, 4: text });
               !text && thirdInput.current.focus();
             }}
           />

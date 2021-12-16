@@ -1,12 +1,12 @@
-import React, {useContext, useRef, useState} from 'react';
-import {View, Text, TouchableOpacity, Platform, StyleSheet} from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, Text, TouchableOpacity, Platform, StyleSheet } from 'react-native';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import MobilePhoneInput from '../components/MobilePhoneInput';
 import axios from 'axios';
 
-const SignupScreen = ({navigation}) => {
+const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState();
   const [name, setName] = useState();
   const [value, setValue] = useState('');
@@ -14,13 +14,11 @@ const SignupScreen = ({navigation}) => {
   const phoneInput = useRef(null);
 
   const register = async () => {
-    
-    // const url = 'http://192.168.1.35:8000/api/v1/users/register';
     const url = 'https://testbook-backend.herokuapp.com/api/v1/users/register';
     const body = {
       name,
       email,
-      mobile:value
+      mobile: value
     };
     console.log(body);
 
@@ -39,10 +37,10 @@ const SignupScreen = ({navigation}) => {
     //   })
     //   .catch(err => console.log('Error: ' + err));
 
-    axios.post(url,body)
+    axios.post(url, body)
       .then(res => {
         console.log('Success: ' + res);
-        navigation.navigate('Verification', {phoneNumber: mobile});
+        navigation.navigate('Verification', { phoneNumber: mobile });
       })
       .catch(err => console.log('Error: ' + err.response.data));
   };
@@ -97,12 +95,12 @@ const SignupScreen = ({navigation}) => {
           By registering, you confirm that you accept our{' '}
         </Text>
         <TouchableOpacity onPress={() => alert('Terms Clicked!')}>
-          <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>
+          <Text style={[styles.color_textPrivate, { color: '#e88832' }]}>
             Terms of service
           </Text>
         </TouchableOpacity>
         <Text style={styles.color_textPrivate}> and </Text>
-        <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>
+        <Text style={[styles.color_textPrivate, { color: '#e88832' }]}>
           Privacy Policy
         </Text>
       </View>

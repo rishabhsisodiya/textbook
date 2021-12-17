@@ -6,14 +6,12 @@ import {
     View,
 } from 'react-native';
 import { Card } from 'react-native-elements';
-import { Colors } from '../constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const SelectNavigation = ({
-    route: {
-        params: { token },
-    }, navigation
-}) => {
+import { Colors } from '../constants';
+
+const SelectNavigation = ({ navigation }) => {
     const [examCategories, setExamCategories] = useState([]);
 
     useEffect(() => {
@@ -21,19 +19,24 @@ const SelectNavigation = ({
     }, []);
 
     const getCategories = async () => {
-        const url = 'https://testbook-backend.herokuapp.com/api/v1/exam/category';
-        const header = {
-            'Authorization': "Bearer " + token
-        };
-        console.log(header);
-        axios.get(url, { headers: header })
-            .then(res => {
-                console.log(res.data);
-                setExamCategories(res.data);
-            })
-            .catch(err => {
-                console.log('Error: ' + err);
-            });
+        try {
+            const url = 'https://testbook-backend.herokuapp.com/api/v1/exam/category';
+            const token = await AsyncStorage.getItem('authToken');
+            const header = {
+                'Authorization': `Bearer ${token}`
+            };
+            axios.get(url, { headers: header })
+                .then(res => {
+                    console.log(res.data);
+                    setExamCategories(res.data);
+                })
+                .catch(err => {
+                    console.log('Error: ' + err);
+                });
+        }
+        catch (e) {
+            console.log(e)
+        }
     };
 
     return (

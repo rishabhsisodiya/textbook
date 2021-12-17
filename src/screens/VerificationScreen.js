@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -8,9 +8,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+
 import { Colors, Fonts } from '../constants';
 import { windowHeight, windowWidth } from '../utils/Dimensions';
-import axios from 'axios';
 
 const VerificationScreen = ({
   route: {
@@ -36,7 +38,9 @@ const VerificationScreen = ({
       .then(res => {
         console.log(res.data);
         // alert('Login Successfully');
-        navigation.navigate('SelectCategory', { token: res.data.data.token });
+        const token = res.data.data.token;
+        AsyncStorage.setItem('authToken', token);
+        navigation.navigate('SelectCategory');
       })
       .catch(err => console.log('Error: ' + err));
   };

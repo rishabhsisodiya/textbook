@@ -1,11 +1,15 @@
 import React from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { windowHeight, windowWidth } from '../utils/Dimensions';
 
-const FormButton = ({ buttonTitle, ...rest }) => {
+const FormButton = ({ buttonTitle, loading, ...rest }) => {
   return (
     <TouchableOpacity style={styles.buttonContainer} {...rest}>
-      <Text style={styles.buttonText}>{buttonTitle}</Text>
+      <Text style={styles.buttonText}>
+        {loading ?
+          <ActivityIndicator size="large" color="#ffffff" />
+          : buttonTitle}
+      </Text>
     </TouchableOpacity>
   );
 };

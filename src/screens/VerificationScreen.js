@@ -5,12 +5,12 @@ import {
   StyleSheet,
   StatusBar,
   TextInput,
-  TouchableOpacity,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
+import FormButton from '../components/FormButton';
 import { Colors, Fonts } from '../constants';
 import { windowHeight, windowWidth } from '../utils/Dimensions';
 
@@ -24,8 +24,10 @@ const VerificationScreen = ({
   const thirdInput = useRef();
   const fourthInput = useRef();
   const [otp, setOtp] = useState({ 1: '', 2: '', 3: '', 4: '' });
+  const [isLoading, setIsLoading] = useState(false);
 
   const verify_otp = async () => {
+    setIsLoading(true);
     const url = 'https://testbook-backend.herokuapp.com/api/v1/users/verify-otp';
     let code = otp['1'] + otp['2'] + otp['3'] + otp['4'];
     const body = {
@@ -40,9 +42,13 @@ const VerificationScreen = ({
         // alert('Login Successfully');
         const token = res.data.data.token;
         AsyncStorage.setItem('authToken', token);
+        setIsLoading(false);
         navigation.navigate('SelectCategory');
       })
-      .catch(err => console.log('Error: ' + err));
+      .catch(err => {
+        console.log('Error: ' + err);
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -116,11 +122,12 @@ const VerificationScreen = ({
           />
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.signinButton}
-        onPress={() => verify_otp()}>
-        <Text style={styles.signinButtonText}>Verify</Text>
-      </TouchableOpacity>
+
+      <FormButton
+        buttonTitle="Verify OTP"
+        loading={isLoading}
+        onPress={() => verify_otp()}
+      />
     </View>
   );
 };
@@ -129,6 +136,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.DEFAULT_WHITE,
+    padding: 20,
+    paddingTop: 50,
   },
   headerContainer: {
     flexDirection: 'row',

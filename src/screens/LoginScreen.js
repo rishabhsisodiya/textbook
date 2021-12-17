@@ -8,18 +8,21 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
+import axios from 'axios';
+
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import MobilePhoneInput from '../components/MobilePhoneInput';
 import { Colors } from '../constants';
-import axios from 'axios';
 
 const LoginScreen = ({ navigation }) => {
   const [mobile, setMobile] = useState('');
   const [formattedMobileValue, setFormattedMobileValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const phoneInput = useRef(null);
 
   const login = async () => {
+    setIsLoading(true);
     const url = 'https://testbook-backend.herokuapp.com/api/v1/users/login';
     const body = {
       mobile,
@@ -31,9 +34,11 @@ const LoginScreen = ({ navigation }) => {
       .then(res => {
         console.log(res.data);
         navigation.navigate('Verification', { phoneNumber: mobile });
+        setIsLoading(false);
       })
       .catch(err => {
         console.log('Error: ' + err);
+        setIsLoading(false);
       });
   };
 
@@ -58,6 +63,7 @@ const LoginScreen = ({ navigation }) => {
 
       <FormButton
         buttonTitle="Sign In"
+        loading={isLoading}
         onPress={() => {
           const checkValid = phoneInput.current?.isValidNumber(mobile);
           if (checkValid) {

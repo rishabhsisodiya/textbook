@@ -2,35 +2,24 @@ import React from 'react';
 import { Button, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-function ScreenOne({ navigation }) {
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Button
-                onPress={() => navigation.navigate('Notifications')}
-                title="Go to notifications"
-            />
-        </View>
-    );
-}
-
-function ScreenTwo({ navigation }) {
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Button
-                onPress={() => navigation.goBack()}
-                title="Go back home"
-            />
-        </View>
-    );
-}
+import ProfileScreen from './ProfileScreen';
+import SubscriptionScreen from './SubscriptionScreen';
+import JobAlertsScreen from './JobAlertsScreen';
+import StoreScreen from './StoreScreen';
+import ReferScreen from './ReferScreen';
+import SettingsScreen from './SettingsScreen';
 
 const Drawer = createDrawerNavigator();
 
 const HomeScreen = ({ navigation }) => {
     return (
         <Drawer.Navigator initialRouteName="ScreenOne">
-            <Drawer.Screen name="ScreenOne" component={ScreenOne} />
-            <Drawer.Screen name="ScreenTwo" component={ScreenTwo} />
+            <Drawer.Screen name="Profile" component={ProfileScreen} />
+            <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
+            <Drawer.Screen name="Job Alerts" component={JobAlertsScreen} />
+            <Drawer.Screen name="Store" component={StoreScreen} />
+            <Drawer.Screen name="Refer and Earn" component={ReferScreen} />
+            <Drawer.Screen name="Settings" component={SettingsScreen} />
         </Drawer.Navigator>
     );
 };

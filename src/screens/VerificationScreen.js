@@ -43,7 +43,7 @@ const VerificationScreen = ({
         const token = res.data.data.token;
         AsyncStorage.setItem('authToken', token);
         setIsLoading(false);
-        navigation.navigate('SelectCategory');
+        navigation.navigate('Home');
       })
       .catch(err => {
         console.log('Error: ' + err);

@@ -6,7 +6,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoginScreen from '../screens/LoginScreen';
 import VerificationScreen from '../screens/VerificationScreen';
 import SignupScreen from '../screens/SignupScreen';
-import SelectCategory from '../screens/SelectCategory';
 import HomeScreen from '../screens/HomeScreen';
 
 const AppStack = createNativeStackNavigator();
@@ -35,7 +34,7 @@ const AuthStack = () => {
   } else if (isFirstLaunch == true) {
     routeName = 'Onboarding';
   } else {
-    routeName = 'Home';
+    routeName = 'Login';
   }
 
   return (
@@ -44,7 +43,6 @@ const AuthStack = () => {
       <AppStack.Screen name="Login" component={LoginScreen} />
       <AppStack.Screen name="Signup" component={SignupScreen} />
       <AppStack.Screen name="Verification" component={VerificationScreen} />
-      <AppStack.Screen name="SelectCategory" component={SelectCategory} />
       <AppStack.Screen name="Home" component={HomeScreen} />
     </AppStack.Navigator>
   );

@@ -61,3 +61,6 @@ buck-out/
 
 # Package
 package-lock.json
+
+# Android Bundle
+**/index.android.bundle

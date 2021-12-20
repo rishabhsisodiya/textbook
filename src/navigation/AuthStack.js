@@ -7,6 +7,7 @@ import LoginScreen from '../screens/LoginScreen';
 import VerificationScreen from '../screens/VerificationScreen';
 import SignupScreen from '../screens/SignupScreen';
 import SelectCategory from '../screens/SelectCategory';
+import HomeScreen from '../screens/HomeScreen';
 
 const AppStack = createNativeStackNavigator();
 
@@ -39,11 +40,12 @@ const AuthStack = () => {
 
   return (
     <AppStack.Navigator initialRouteName={routeName} screenOptions={{ headerShown: false }}>
-      <AppStack.Screen name="Home" component={OnboardingScreen} />
+      <AppStack.Screen name="Onboarding" component={OnboardingScreen} />
       <AppStack.Screen name="Login" component={LoginScreen} />
       <AppStack.Screen name="Signup" component={SignupScreen} />
       <AppStack.Screen name="Verification" component={VerificationScreen} />
       <AppStack.Screen name="SelectCategory" component={SelectCategory} />
+      <AppStack.Screen name="Home" component={HomeScreen} />
     </AppStack.Navigator>
   );
 };

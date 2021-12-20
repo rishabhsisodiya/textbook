@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, Platform, StyleSheet } from 'react-native';
+import axios from 'axios';
+
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import MobilePhoneInput from '../components/MobilePhoneInput';
-import axios from 'axios';
+import { ApiEndpoints } from '../constants';
 
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState();
@@ -14,7 +16,7 @@ const SignupScreen = ({ navigation }) => {
   const phoneInput = useRef(null);
 
   const register = async () => {
-    const url = 'https://testbook-backend.herokuapp.com/api/v1/users/register';
+    const url = ApiEndpoints.BASE_URL + '/users/register';
     const body = {
       name,
       email,
@@ -22,25 +24,10 @@ const SignupScreen = ({ navigation }) => {
     };
     console.log(body);
 
-    // fetch(url, {
-    //   method: 'POST',
-    //   headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(body),
-    // })
-    //   .then(res => {
-    //     console.log('Success: ');
-    //     console.log(res.json());
-    //     navigation.navigate('Verification', {phoneNumber: mobile});
-    //   })
-    //   .catch(err => console.log('Error: ' + err));
-
     axios.post(url, body)
       .then(res => {
         console.log('Success: ' + res);
-        navigation.navigate('Verification', { phoneNumber: mobile });
+        navigation.navigate('Verification', { phoneNumber: value });
       })
       .catch(err => console.log('Error: ' + err.response.data));
   };

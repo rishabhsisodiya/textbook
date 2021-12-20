@@ -13,7 +13,7 @@ import axios from 'axios';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import MobilePhoneInput from '../components/MobilePhoneInput';
-import { Colors } from '../constants';
+import { ApiEndpoints, Colors } from '../constants';
 
 const LoginScreen = ({ navigation }) => {
   const [mobile, setMobile] = useState('');
@@ -23,7 +23,7 @@ const LoginScreen = ({ navigation }) => {
 
   const login = async () => {
     setIsLoading(true);
-    const url = 'https://testbook-backend.herokuapp.com/api/v1/users/login';
+    const url = ApiEndpoints.BASE_URL + '/users/login';
     const body = {
       mobile,
     };

@@ -4,6 +4,8 @@ import { FlatGrid } from 'react-native-super-grid';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
+import { ApiEndpoints } from '../constants';
+
 const StoreScreen = ({ navigation }) => {
     const [examCategories, setExamCategories] = useState([]);
 
@@ -22,7 +24,7 @@ const StoreScreen = ({ navigation }) => {
 
     const getCategories = async () => {
         try {
-            const url = 'https://testbook-backend.herokuapp.com/api/v1/exam/category';
+            const url = ApiEndpoints.BASE_URL + '/exam/category';
             const token = await AsyncStorage.getItem('authToken');
             const header = {
                 'Authorization': `Bearer ${token}`
@@ -42,7 +44,7 @@ const StoreScreen = ({ navigation }) => {
     };
 
     function openSubCategories(categoryId) {
-        console.log(categoryId);
+        // console.log(categoryId);
     }
 
     return (

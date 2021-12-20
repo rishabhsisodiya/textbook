@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 import FormButton from '../components/FormButton';
-import { Colors, Fonts } from '../constants';
+import { ApiEndpoints, Colors, Fonts } from '../constants';
 import { windowHeight, windowWidth } from '../utils/Dimensions';
 
 const VerificationScreen = ({
@@ -28,7 +28,7 @@ const VerificationScreen = ({
 
   const verify_otp = async () => {
     setIsLoading(true);
-    const url = 'https://testbook-backend.herokuapp.com/api/v1/users/verify-otp';
+    const url = ApiEndpoints.BASE_URL + '/users/verify-otp';
     let code = otp['1'] + otp['2'] + otp['3'] + otp['4'];
     const body = {
       mobile: phoneNumber,
@@ -40,7 +40,7 @@ const VerificationScreen = ({
       .then(res => {
         console.log(res.data);
         // alert('Login Successfully');
-        const token = res.data.data.token;
+        const token = res.data.token;
         AsyncStorage.setItem('authToken', token);
         setIsLoading(false);
         navigation.navigate('Home');
